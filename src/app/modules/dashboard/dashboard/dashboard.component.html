@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <div class="row max-content mb-3 align-items-center">
+    <div class="col-12 mt-4">
+      <h1 class="smaller-size-mobile mb-0 mt-0">Competitions List</h1>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row max-content justify-content-center align-middle">
+    <div class="col-12">
+      <table class="table table-hover table-striped">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Area Name</th>
+            <th>Competition Name</th>
+            <th># Teams</th>
+            <th>Current season match day</th>
+            <th>Current season start day</th>
+            <th>Current season end day</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let competition of competitions; let i = index">
+            <td>
+              <a class="text-link" [routerLink]="['details', competition.id]">
+                <strong>{{ i + 1 }}</strong>
+              </a>
+            </td>
+            <td>
+              <a class="text-link">
+                <strong>{{ competition.area.name }}</strong>
+              </a>
+            </td>
+            <td>
+              <span class="text-nowrap">
+                {{ competition.name }}
+              </span>
+            </td>
+            <td>
+              <span class="mr-2">
+                # teams
+              </span>
+            </td>
+            <td>
+              <span *ngIf="competition.currentSeason">
+                {{ competition.currentSeason.currentMatchday }}
+              </span>
+            </td>
+            <td>
+              <span *ngIf="competition.currentSeason">
+                {{ competition.currentSeason.startDate }}
+              </span>
+            </td>
+            <td>
+              <span *ngIf="competition.currentSeason">
+                {{ competition.currentSeason.endDate }}
+              </span>
+            </td>
+          </tr>
+          <!--tr *ngIf="users.length == 0" class="no-hover">
+              <td colspan="10"><admin-no-content></admin-no-content></td>
+            </tr-->
+        </tbody>
+      </table>
+
+      <!--admin-pagination
+        [pagination]="pagination"
+        [totalElements]="totalOfRecords"
+        (pageChanged)="getUsers(form.value)"
+        (recordsPerPageChanged)="setRecordsPerPage(form.value)"
+      ></admin-pagination-->
+    </div>
+  </div>
+</div>

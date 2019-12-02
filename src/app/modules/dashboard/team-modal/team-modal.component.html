@@ -1,0 +1,96 @@
+<div class="modal-header">
+  <h4 class="modal-title">Team Modal</h4>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <ul *ngIf="team">
+    <li>
+      <strong>Area name:</strong>
+      {{ team.area.name }}
+    </li>
+    <li>
+      <strong>Name:</strong>
+      {{ team.name }}
+    </li>
+    <li>
+      <strong>Crest:</strong>
+      {{ team.crestUrl }}
+    </li>
+    <li>
+      <strong>Address:</strong>
+      {{ team.address }}
+    </li>
+    <li>
+      <strong>Phone:</strong>
+      {{ team.phone }}
+    </li>
+    <li>
+      <strong>Website Link:</strong>
+      {{ team.website }}
+    </li>
+    <li>
+      <strong>Email Link:</strong>
+      {{ team.email }}
+    </li>
+    <li>
+      <strong>Founded year:</strong>
+      {{ team.founded }}
+    </li>
+    <li>
+      <strong>Venue name:</strong>
+      {{ team.venue }}
+    </li>
+  </ul>
+
+  <button type="button" class="btn btn-primary btn-lg btn-block">Save as favorite</button>
+
+  <div class="players mt-4">
+    <h3>Players:</h3>
+    <table class="table table-hover table-striped table-responsive">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Nationality</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let teamPlayer of teamPlayers; let i = index">
+          <td>
+            {{ i + 1 }}
+          </td>
+          <td>
+            <strong>{{ teamPlayer.name }}</strong>
+          </td>
+          <td>
+            <span class="text-nowrap">
+              {{ teamPlayer.position }}
+            </span>
+          </td>
+          <td>
+            <span class="mr-2">
+              {{ teamPlayer.nationality }}
+            </span>
+          </td>
+          <td>
+            <span>
+              {{ teamPlayer.dateOfBirth }}
+            </span>
+          </td>
+        </tr>
+        <!--tr *ngIf="users.length == 0" class="no-hover">
+                <td colspan="10"><admin-no-content></admin-no-content></td>
+              </tr-->
+      </tbody>
+    </table>
+  </div>
+</div>

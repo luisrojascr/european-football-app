@@ -1,0 +1,168 @@
+<div class="container-fluid">
+  <div class="row max-content mb-3 align-items-center">
+    <div class="col-12 mt-4">
+      <h1 class="smaller-size-mobile mb-0 mt-0">Competition Details</h1>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row max-content justify-content-center align-middle">
+    <div class="col-12">
+      <table class="table table-hover table-striped">
+        <thead class="thead-light">
+          <tr>
+            <th>Competition Area Name</th>
+            <th>Competition Name</th>
+            <th>Competition last updated time</th>
+            <th>Competition start day</th>
+            <th>Competition end day</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="competitionsDetails">
+            <td>
+              <a class="text-link">
+                <strong>{{ competitionsDetails.area.name }}</strong>
+              </a>
+            </td>
+            <td>
+              <span class="text-nowrap">
+                {{ competitionsDetails.name }}
+              </span>
+            </td>
+            <td>
+              <span class="mr-2">
+                {{ competitionsDetails.lastUpdated }}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ competitionsDetails.currentSeason.startDate }}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ competitionsDetails.currentSeason.endDate }}
+              </span>
+            </td>
+          </tr>
+          <!--tr *ngIf="users.length == 0" class="no-hover">
+                <td colspan="10"><admin-no-content></admin-no-content></td>
+              </tr-->
+        </tbody>
+      </table>
+
+      <!--admin-pagination
+          [pagination]="pagination"
+          [totalElements]="totalOfRecords"
+          (pageChanged)="getUsers(form.value)"
+          (recordsPerPageChanged)="setRecordsPerPage(form.value)"
+        ></admin-pagination-->
+    </div>
+  </div>
+
+  <div class="row max-content mb-3 align-items-center">
+    <div class="col-12 mt-4">
+      <h1 class="smaller-size-mobile mb-0 mt-0">Team Standings</h1>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="row max-content justify-content-center align-middle">
+    <div class="col-12">
+      <table class="table table-hover table-striped table-responsive">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Crest/logo</th>
+            <th>Position</th>
+            <th>Played games</th>
+            <th>Won games</th>
+            <th>Draw</th>
+            <th>Lost</th>
+            <th>Points</th>
+            <th>Goals in favor</th>
+            <th>Goals against</th>
+            <th>Goal difference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let competitionStanding of competitionStandingsTotal; let i = index">
+            <td>
+              {{ i + 1 }}
+            </td>
+            <td>
+              <a
+                class="btn btn-primary btn-sm"
+                (click)="openTeamModal(competitionStanding.team.id)"
+              >
+                <strong>{{ competitionStanding.team.name }}</strong>
+              </a>
+            </td>
+            <td>
+              <span class="text-nowrap">
+                {{ competitionStanding.team.crestUrl }}
+              </span>
+            </td>
+            <td>
+              <span class="mr-2">
+                {{ competitionStanding.position }}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ competitionStanding.playedGames }}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ competitionStanding.won }}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ competitionStanding.draw }}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ competitionStanding.lost }}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ competitionStanding.points }}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ competitionStanding.goalsFor }}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ competitionStanding.goalsAgainst }}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ competitionStanding.goalDifference }}
+              </span>
+            </td>
+          </tr>
+          <!--tr *ngIf="users.length == 0" class="no-hover">
+                <td colspan="10"><admin-no-content></admin-no-content></td>
+              </tr-->
+        </tbody>
+      </table>
+
+      <!--admin-pagination
+          [pagination]="pagination"
+          [totalElements]="totalOfRecords"
+          (pageChanged)="getUsers(form.value)"
+          (recordsPerPageChanged)="setRecordsPerPage(form.value)"
+        ></admin-pagination-->
+    </div>
+  </div>
+</div>
