@@ -48,7 +48,7 @@ export class CompetitionDetailsComponent implements OnInit {
         .getCompetitionStandings(this.competitionId)
         .toPromise();
 
-      console.log('standings response: ', response.standings[0].table);
+      // console.log('standings response: ', response.standings[0].table);
       this.competitionStandingsTotal = response.standings[0].table;
       this.competitionStandingsHome = response.standings[1].table;
       this.competitionStandingsAway = response.standings[2].table;

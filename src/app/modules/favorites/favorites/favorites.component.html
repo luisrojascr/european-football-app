@@ -15,22 +15,21 @@
       </tr>
     </thead>
     <tbody>
-      <!--tr *ngFor="let competition of competitions; let i = index"-->
-      <tr>
+      <tr *ngFor="let favorite of favorites; let i = index">
         <td>
-          1
+          {{ i + 1 }}
         </td>
         <td>
-          <strong>name</strong>
+          <strong>{{ favorite.name }}</strong>
         </td>
         <td>
           <span class="text-nowrap">
-            Crest
+            {{ favorite.crest }}
           </span>
         </td>
         <td>
           <span class="mr-2">
-            competition details
+            {{ favorite.competitionDetails }}
           </span>
         </td>
       </tr>

@@ -1,11 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title">Team Modal</h4>
-  <button
-    type="button"
-    class="close"
-    aria-label="Close"
-    (click)="activeModal.dismiss('Cross click')"
-  >
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -49,7 +44,22 @@
     </li>
   </ul>
 
-  <button type="button" class="btn btn-primary btn-lg btn-block">Save as favorite</button>
+  <button
+    *ngIf="saveFavorite"
+    type="button"
+    class="btn btn-primary btn-lg btn-block"
+    (click)="saveAsFavorite(team.id)"
+  >
+    Save as favorite
+  </button>
+  <button
+    *ngIf="removeFavorite"
+    type="button"
+    class="btn btn-danger btn-lg btn-block"
+    (click)="saveAsFavorite(team.id)"
+  >
+    Remove from favorites
+  </button>
 
   <div class="players mt-4">
     <h3>Players:</h3>
