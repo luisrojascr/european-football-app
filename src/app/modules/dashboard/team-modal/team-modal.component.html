@@ -97,9 +97,9 @@
             </span>
           </td>
         </tr>
-        <!--tr *ngIf="users.length == 0" class="no-hover">
-                <td colspan="10"><admin-no-content></admin-no-content></td>
-              </tr-->
+        <tr *ngIf="teamPlayers && teamPlayers.length == 0" class="no-hover">
+          <td colspan="5"><app-no-content></app-no-content></td>
+        </tr>
       </tbody>
     </table>
   </div>

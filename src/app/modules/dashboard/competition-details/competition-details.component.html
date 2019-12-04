@@ -46,9 +46,9 @@
               </span>
             </td>
           </tr>
-          <!--tr *ngIf="users.length == 0" class="no-hover">
-                <td colspan="10"><admin-no-content></admin-no-content></td>
-              </tr-->
+          <tr *ngIf="competitionsDetails && competitionsDetails.length == 0" class="no-hover">
+            <td colspan="5"><app-no-content></app-no-content></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -86,12 +86,12 @@
               {{ i + 1 }}
             </td>
             <td>
-              <a
+              <button
                 class="btn btn-primary btn-sm"
                 (click)="openTeamModal(competitionStanding.team.id)"
               >
                 <strong>{{ competitionStanding.team.name }}</strong>
-              </a>
+              </button>
             </td>
             <td>
               <span class="text-nowrap">
@@ -149,9 +149,12 @@
               </span>
             </td>
           </tr>
-          <!--tr *ngIf="users.length == 0" class="no-hover">
-                <td colspan="10"><admin-no-content></admin-no-content></td>
-              </tr-->
+          <tr
+            *ngIf="competitionStandingsTotal && competitionStandingsTotal.length == 0"
+            class="no-hover"
+          >
+            <td colspan="12"><app-no-content></app-no-content></td>
+          </tr>
         </tbody>
       </table>
     </div>

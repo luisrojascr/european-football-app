@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompetitionsService } from 'src/app/core/services/competitions/competitions.service';
+import { Competition } from 'src/app/shared/models/competitions.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,7 @@ import { CompetitionsService } from 'src/app/core/services/competitions/competit
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  public competitions: any;
+  public competitions: Competition[];
 
   constructor(private readonly competitionsService: CompetitionsService) {}
 
@@ -15,7 +16,7 @@ export class DashboardComponent implements OnInit {
     this.getCompetitions();
   }
 
-  public async getCompetitions(): Promise<void> {
+  private async getCompetitions(): Promise<void> {
     const availableCompetitionsIds = [
       2013,
       2016,
@@ -38,7 +39,7 @@ export class DashboardComponent implements OnInit {
         return availableCompetitionsIds.includes(competition.id);
       });
     } catch (error) {
-      // this.toastrService.danger(error);
+      this.competitions = [];
       console.log('error: ', error);
     }
   }

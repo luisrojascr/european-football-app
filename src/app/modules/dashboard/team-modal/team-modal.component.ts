@@ -4,6 +4,8 @@ import { Store, select } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Favorite } from '../../../shared/models/favorite.model';
+import { TeamPlayer } from 'src/app/shared/models/team-players.model';
+import { Team } from 'src/app/shared/models/team.model';
 
 @Component({
   selector: 'app-team-modal',
@@ -11,8 +13,8 @@ import { Favorite } from '../../../shared/models/favorite.model';
   styleUrls: ['./team-modal.component.scss']
 })
 export class TeamModalComponent implements OnInit {
-  public team: any;
-  public teamPlayers: any;
+  public team: Team[];
+  public teamPlayers: TeamPlayer[];
   @Input()
   public teamId: number;
   public competitionId: number;
@@ -33,12 +35,12 @@ export class TeamModalComponent implements OnInit {
 
     this.storeSub = this.store.pipe(select('competitions')).subscribe((teams) => {
       if (teams) {
-        teams.savedTeam.forEach((savedTeam) => this.savedTeamsIds.push(savedTeam.id));
+        teams.favorites.forEach((favorite) => this.savedTeamsIds.push(favorite.id));
       }
     });
   }
 
-  public async getCompetitionTeams(): Promise<void> {
+  private async getCompetitionTeams(): Promise<void> {
     try {
       const response = await this.competitionsService
         .getCompetitionTeams(this.competitionId)
@@ -50,16 +52,18 @@ export class TeamModalComponent implements OnInit {
     }
   }
 
-  public async getTeam(): Promise<void> {
+  private async getTeam(): Promise<void> {
     try {
       const response = await this.competitionsService.getTeam(this.teamId).toPromise();
 
       this.teamPlayers = response.squad;
     } catch (error) {
+      this.teamPlayers = [];
       console.log('error: ', error);
     }
   }
 
+  /** Get age number from date value */
   public getAge(dateString: Date): number {
     const today = new Date();
     const birthDate = new Date(dateString);
@@ -71,6 +75,7 @@ export class TeamModalComponent implements OnInit {
     return age;
   }
 
+  /** Save a team as favorite in the store */
   public saveAsFavorite(teamId: number): void {
     this.saveFavorite = !this.saveFavorite;
     this.removeFavorite = !this.removeFavorite;
@@ -78,9 +83,12 @@ export class TeamModalComponent implements OnInit {
     const favoritePayload: Favorite[] = [
       {
         id: teamId,
-        name: this.team.name,
-        crest: this.team.crestUrl,
-        competitionDetails: this.team.website
+        // tslint:disable-next-line:no-string-literal
+        name: this.team['name'],
+        // tslint:disable-next-line:no-string-literal
+        crest: this.team['crestUrl'],
+        // tslint:disable-next-line:no-string-literal
+        competitionDetails: this.team['website']
       }
     ];
 
@@ -90,6 +98,7 @@ export class TeamModalComponent implements OnInit {
     });
   }
 
+  /** Remove team from favorites in the store */
   public removeAsFavorite(teamId: any): void {
     this.saveFavorite = !this.saveFavorite;
     this.removeFavorite = !this.removeFavorite;

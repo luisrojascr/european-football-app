@@ -6,18 +6,18 @@ export function reducer(state: CompetitionsState, action): CompetitionsState {
       if (state) {
         return {
           ...state,
-          savedTeam: state.savedTeam.concat(action.payload)
+          favorites: state.favorites.concat(action.payload)
         };
       } else {
         return {
           ...state,
-          savedTeam: action.payload
+          favorites: action.payload
         };
       }
     case 'REMOVE_FROM_FAVORITE':
       return {
         ...state,
-        savedTeam: state.savedTeam.filter((comp) => comp.id !== action.payload)
+        favorites: state.favorites.filter((comp) => comp.id !== action.payload)
       };
     default:
       return state;

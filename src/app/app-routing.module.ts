@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: (): Promise<any> =>
-      import('./modules/competitions/dashboard.module').then((module) => module.DashboardModule)
+      import('./modules/dashboard/dashboard.module').then((module) => module.DashboardModule)
   },
   {
     path: 'favorites',

@@ -29,13 +29,19 @@
         </td>
         <td>
           <span class="mr-2">
-            {{ favorite.competitionDetails }}
+            <a
+              *ngIf="competitionDetailsId"
+              class="text-link"
+              [routerLink]="['/dashboard/details', competitionDetailsId]"
+            >
+              <strong>Competition details link</strong>
+            </a>
           </span>
         </td>
       </tr>
-      <!--tr *ngIf="users.length == 0" class="no-hover">
-              <td colspan="10"><admin-no-content></admin-no-content></td>
-            </tr-->
+      <tr *ngIf="!favorites || favorites.length == 0" class="no-hover">
+        <td colspan="4"><app-no-content></app-no-content></td>
+      </tr>
     </tbody>
   </table>
 </div>

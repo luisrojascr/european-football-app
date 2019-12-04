@@ -28,7 +28,7 @@
               </a>
             </td>
             <td>
-              <a class="text-link">
+              <a class="text-link" [routerLink]="['details', competition.id]">
                 <strong>{{ competition.area.name }}</strong>
               </a>
             </td>
@@ -58,9 +58,9 @@
               </span>
             </td>
           </tr>
-          <!--tr *ngIf="users.length == 0" class="no-hover">
-              <td colspan="10"><admin-no-content></admin-no-content></td>
-            </tr-->
+          <tr *ngIf="competitions && competitions.length == 0" class="no-hover">
+            <td colspan="7"><app-no-content></app-no-content></td>
+          </tr>
         </tbody>
       </table>
     </div>
