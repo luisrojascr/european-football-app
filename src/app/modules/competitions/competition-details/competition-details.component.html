@@ -32,7 +32,7 @@
             </td>
             <td>
               <span class="mr-2">
-                {{ competitionsDetails.lastUpdated }}
+                {{ competitionsDetails.lastUpdated | date: 'MM/dd/yyyy' }}
               </span>
             </td>
             <td>
@@ -51,13 +51,6 @@
               </tr-->
         </tbody>
       </table>
-
-      <!--admin-pagination
-          [pagination]="pagination"
-          [totalElements]="totalOfRecords"
-          (pageChanged)="getUsers(form.value)"
-          (recordsPerPageChanged)="setRecordsPerPage(form.value)"
-        ></admin-pagination-->
     </div>
   </div>
 
@@ -102,7 +95,12 @@
             </td>
             <td>
               <span class="text-nowrap">
-                {{ competitionStanding.team.crestUrl }}
+                <img
+                  *ngIf="competitionStanding.team.crestUrl"
+                  [src]="competitionStanding.team.crestUrl"
+                  alt="Crest Image"
+                  width="50"
+                />
               </span>
             </td>
             <td>
@@ -156,13 +154,6 @@
               </tr-->
         </tbody>
       </table>
-
-      <!--admin-pagination
-          [pagination]="pagination"
-          [totalElements]="totalOfRecords"
-          (pageChanged)="getUsers(form.value)"
-          (recordsPerPageChanged)="setRecordsPerPage(form.value)"
-        ></admin-pagination-->
     </div>
   </div>
 </div>

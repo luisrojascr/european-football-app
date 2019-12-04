@@ -14,10 +14,9 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   constructor(private store: Store<any>) {}
 
   ngOnInit(): void {
-    this.storeSub = this.store.pipe(select('competitions')).subscribe((competitions) => {
-      if (competitions) {
-        console.log('competitions.savedCompetition: ', competitions.savedCompetition);
-        this.favorites = competitions.savedCompetition;
+    this.storeSub = this.store.pipe(select('competitions')).subscribe((teams) => {
+      if (teams) {
+        this.favorites = teams.savedTeam;
       }
     });
   }

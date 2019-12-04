@@ -6,7 +6,7 @@ import { DashboardParentComponent } from './parent/dashboard-parent.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TeamModalComponent } from './team-modal/team-modal.component';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from '../state/competition.reducer';
+import { reducer } from '../../state/competition.reducer';
 
 @NgModule({
   imports: [SharedModule, DashboardRoutingModule, StoreModule.forFeature('competitions', reducer)],

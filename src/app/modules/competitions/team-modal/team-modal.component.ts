@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CompetitionsService } from 'src/app/core/services/competitions/competitions.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { Favorite } from '../../../shared/models/favorite.model';
 
 @Component({
   selector: 'app-team-modal',
@@ -16,6 +18,8 @@ export class TeamModalComponent implements OnInit {
   public competitionId: number;
   public saveFavorite = true;
   public removeFavorite = false;
+  public savedTeamsIds = [];
+  private storeSub: Subscription;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -26,6 +30,12 @@ export class TeamModalComponent implements OnInit {
   ngOnInit() {
     this.getCompetitionTeams();
     this.getTeam();
+
+    this.storeSub = this.store.pipe(select('competitions')).subscribe((teams) => {
+      if (teams) {
+        teams.savedTeam.forEach((savedTeam) => this.savedTeamsIds.push(savedTeam.id));
+      }
+    });
   }
 
   public async getCompetitionTeams(): Promise<void> {
@@ -34,11 +44,8 @@ export class TeamModalComponent implements OnInit {
         .getCompetitionTeams(this.competitionId)
         .toPromise();
 
-      // console.log('teamList response: ', response);
       this.team = response.teams.filter((team) => team.id === this.teamId)[0];
-      // console.log('my team: ', this.team);
     } catch (error) {
-      // this.toastrService.danger(error);
       console.log('error: ', error);
     }
   }
@@ -47,19 +54,28 @@ export class TeamModalComponent implements OnInit {
     try {
       const response = await this.competitionsService.getTeam(this.teamId).toPromise();
 
-      // console.log('teamPlayers response: ', response);
       this.teamPlayers = response.squad;
     } catch (error) {
-      // this.toastrService.danger(error);
       console.log('error: ', error);
     }
   }
 
-  public saveAsFavorite(teamId: any): void {
+  public getAge(dateString: Date): number {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const months = today.getMonth() - birthDate.getMonth();
+    if (months < 0 || (months === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
+  public saveAsFavorite(teamId: number): void {
     this.saveFavorite = !this.saveFavorite;
     this.removeFavorite = !this.removeFavorite;
 
-    const favoritePayload = [
+    const favoritePayload: Favorite[] = [
       {
         id: teamId,
         name: this.team.name,
@@ -71,6 +87,16 @@ export class TeamModalComponent implements OnInit {
     this.store.dispatch({
       type: 'SAVE_AS_FAVORITE',
       payload: favoritePayload
+    });
+  }
+
+  public removeAsFavorite(teamId: any): void {
+    this.saveFavorite = !this.saveFavorite;
+    this.removeFavorite = !this.removeFavorite;
+
+    this.store.dispatch({
+      type: 'REMOVE_FROM_FAVORITE',
+      payload: teamId
     });
   }
 }

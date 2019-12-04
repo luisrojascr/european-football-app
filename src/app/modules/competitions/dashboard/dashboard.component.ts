@@ -34,11 +34,8 @@ export class DashboardComponent implements OnInit {
     try {
       const response = await this.competitionsService.getCompetitions().toPromise();
 
-      // TODO: add reduce method
-      availableCompetitionsIds.forEach((availableCompetitionId) => {
-        this.competitions = response.competitions.filter((competition) => {
-          return competition.id === availableCompetitionId;
-        });
+      this.competitions = response.competitions.filter((competition) => {
+        return availableCompetitionsIds.includes(competition.id);
       });
     } catch (error) {
       // this.toastrService.danger(error);

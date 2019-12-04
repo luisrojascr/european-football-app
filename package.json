@@ -22,6 +22,7 @@
     "@angular/router": "~8.2.0",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
     "@ngrx/store": "^8.5.2",
+    "@ngrx/store-devtools": "^8.5.2",
     "bootstrap": "^4.4.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

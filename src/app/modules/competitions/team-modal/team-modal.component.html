@@ -16,7 +16,7 @@
     </li>
     <li>
       <strong>Crest:</strong>
-      {{ team.crestUrl }}
+      <img *ngIf="team.crestUrl" [src]="team.crestUrl" alt="Crest image" width="50" />
     </li>
     <li>
       <strong>Address:</strong>
@@ -28,11 +28,11 @@
     </li>
     <li>
       <strong>Website Link:</strong>
-      {{ team.website }}
+      <a class="text-link" [href]="team.website" target="_blank">{{ team.website }}</a>
     </li>
     <li>
       <strong>Email Link:</strong>
-      {{ team.email }}
+      <a class="text-link" href="mailto:{{ team.email }}" target="_blank">{{ team.email }}</a>
     </li>
     <li>
       <strong>Founded year:</strong>
@@ -56,7 +56,7 @@
     *ngIf="removeFavorite"
     type="button"
     class="btn btn-danger btn-lg btn-block"
-    (click)="saveAsFavorite(team.id)"
+    (click)="removeAsFavorite(team.id)"
   >
     Remove from favorites
   </button>
@@ -93,7 +93,7 @@
           </td>
           <td>
             <span>
-              {{ teamPlayer.dateOfBirth }}
+              {{ getAge(teamPlayer.dateOfBirth) }}
             </span>
           </td>
         </tr>
