@@ -2,6 +2,13 @@
 
 Test project that allows to see and interact with Eurpean Football Data.
 
+Steps to launch the project:
+
+1. Clone the repo.
+2. Run `npm install` to install dependencies.
+3. Run `npm start` to launch te app in your browser.
+4. Navigate to `http://localhost:4200/`.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
 
 ## Development server
